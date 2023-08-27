@@ -1,0 +1,71 @@
+{
+  "name": "@ownft-platform/ownft-platform-js",
+  "version": "0.0.2",
+  "description": "JavaScript SDK for NFT marketplaces powered by ownft Platform",
+  "license": "MIT",
+  "author": "ownft Platform",
+  "homepage": "https://github.com/ownftPlatform/ownft-platform-js#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ownftPlatform/ownft-platform-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ownftPlatform/ownft-platform-js/issues"
+  },
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "build": "npm run build:clean && tsc -p tsconfig.build.json",
+    "build:bundle": "npm run build && npm run bundle",
+    "build:clean": "rm -rf ./lib",
+    "bundle": "browserify lib/index.js -o lib/bundle.js",
+    "check-types": "tsc --noEmit --project tsconfig.json",
+    "prettier:check": "prettier --check .",
+    "prettier:check:package.json": "prettier-package-json --list-different",
+    "prettier:fix": "prettier --write .",
+    "publishh": "npm publish --access=public",
+    "publishh:dryrun": "npm publish --dry-run",
+    "publishh:whoami": "npm whoami",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@ethersproject/bignumber": "^5.7.0"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "eslint": "^8.48.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "nyc": "^15.1.0",
+    "prettier": "^3.0.2",
+    "prettier-package-json": "^2.8.0",
+    "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "lint-staged": {
+    "package.json": [
+      "prettier-package-json --write"
+    ],
+    "**/*.{ts,tsx,js,jsx,html,md,mdx,yml,json}": [
+      "prettier --write"
+    ],
+    "**/*.{ts,tsx,js,jsx}": [
+      "eslint --cache --fix"
+    ]
+  },
+  "nyc": {
+    "exclude": [
+      "src/utils/tokens/**/*.ts",
+      "src/typechain"
+    ]
+  }
+}
